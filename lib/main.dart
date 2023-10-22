@@ -3,10 +3,10 @@ import 'package:flutter/gestures.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/utils.dart';
-import 'package:myapp/page-1/flutter.dart';
+//import 'package:myapp/page-1/luoneLogin.dart';
 // import 'package:myapp/page-1/flutter-9rG.dart';
 // import 'package:myapp/page-1/flutter-rtQ.dart';
-// import 'package:myapp/page-1/flutter-Q3z.dart';
+import 'package:myapp/page-1/userJoin.dart';
 // import 'package:myapp/page-1/flutter-Vnp.dart';
 // import 'package:myapp/page-1/flutter-FYL.dart';
 // import 'package:myapp/page-1/flutter-EJL.dart';
@@ -21,20 +21,20 @@ import 'package:myapp/page-1/flutter.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-	@override
-	Widget build(BuildContext context) {
-	return MaterialApp(
-		title: 'Flutter',
-		debugShowCheckedModeBanner: false,
-		scrollBehavior: MyCustomScrollBehavior(),
-		theme: ThemeData(
-		primarySwatch: Colors.blue,
-		),
-		home: Scaffold(
-		body: SingleChildScrollView(
-			child: Scene(),
-		),
-		),
-	);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter',
+      debugShowCheckedModeBanner: false,
+      scrollBehavior: MyCustomScrollBehavior(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        body: SingleChildScrollView(
+          child: Scene(),
+        ),
+      ),
+    );
+  }
 }
