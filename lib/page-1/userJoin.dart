@@ -265,7 +265,7 @@ class UserJoin extends StatelessWidget {
                                 color: Color(0xff000000),
                               ),
                               children: [
-                                TextSpan(
+                                const TextSpan(
                                   text: '비밀번호 확인  ',
                                 ),
                                 TextSpan(
