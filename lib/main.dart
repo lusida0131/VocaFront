@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myapp/ui/studyCategory.dart';
+import 'package:myapp/ui/userJoin.dart';
 import 'package:myapp/utils.dart';
-import 'package:myapp/page-1/luoneLogin.dart';
+import 'package:myapp/ui/luoneLogin.dart';
 // import 'package:myapp/page-1/flutter-9rG.dart';
 // import 'package:myapp/page-1/flutter-rtQ.dart';
-import 'package:myapp/page-1/userJoin.dart';
 // import 'package:myapp/page-1/flutter-Vnp.dart';
 // import 'package:myapp/page-1/flutter-FYL.dart';
 // import 'package:myapp/page-1/flutter-EJL.dart';
@@ -32,7 +33,9 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         body: Container(
+          ////child: StudyCategory(),
           child: LuoneLogin(),
+          //child: UserJoin(),
         ),
       ),
     );
