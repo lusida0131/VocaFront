@@ -101,7 +101,12 @@ class StudyCategory extends StatelessWidget {
                       borderRadius: BorderRadius.circular(35 * fem),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    //Navigator.push(
+                    //context,
+                    //MaterialPageRoute(
+                    //builder: (context) => VocaStudyKind()));
+                  },
                   child: Text(
                     'Voca 학습하기',
                     textAlign: TextAlign.center,

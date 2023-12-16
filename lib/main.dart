@@ -4,20 +4,11 @@ import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/ui/studyCategory.dart';
 import 'package:myapp/ui/userJoin.dart';
+import 'package:myapp/ui/vocaStudy_dev.dart';
 import 'package:myapp/utils.dart';
 import 'package:myapp/ui/luoneLogin.dart';
-// import 'package:myapp/page-1/flutter-9rG.dart';
-// import 'package:myapp/page-1/flutter-rtQ.dart';
-// import 'package:myapp/page-1/flutter-Vnp.dart';
-// import 'package:myapp/page-1/flutter-FYL.dart';
-// import 'package:myapp/page-1/flutter-EJL.dart';
-// import 'package:myapp/page-1/flutter-2pQ.dart';
-// import 'package:myapp/page-1/flutter-2gY.dart';
-// import 'package:myapp/page-1/flutter-6Q8.dart';
-// import 'package:myapp/page-1/flutter-4sJ.dart';
-// import 'package:myapp/page-1/flutter-2de.dart';
-// import 'package:myapp/page-1/flutter-Hc4.dart';
-// import 'package:myapp/page-1/flutter-UfA.dart';
+import 'package:myapp/ui/vocaStudyList_dev.dart';
+import 'package:myapp/ui/vocaStudyExamList_dev.dart';
 
 void main() => runApp(MyApp());
 
@@ -33,9 +24,12 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         body: Container(
-          ////child: StudyCategory(),
-          child: LuoneLogin(),
+          child: StudyCategory(),
+          //child: VocaStudyKind(),
+          //child: LuoneLogin(),
           //child: UserJoin(),
+          //child: VocaStudyList(),
+          //child: VocaStudyExamList(),
         ),
       ),
     );

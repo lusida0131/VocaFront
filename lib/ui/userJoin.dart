@@ -53,6 +53,7 @@ class _UserJoinState extends State<UserJoin> {
         // 오류 처리
         final decodedResponse = json.decode(utf8.decode(response.bodyBytes));
         print(decodedResponse);
+
         showDialog(
           context: context,
           builder: (BuildContext context) {
