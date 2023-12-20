@@ -120,7 +120,53 @@ class _VocaStudyExamListState extends State<VocaStudyExamList> {
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 70, 0, 10),
+                    // iwA (1:129)
+                    margin: EdgeInsets.fromLTRB(0, 30, 0, 1),
+                    child: Text(
+                      '중등 입문 Day 00 ~ 00 [39 / 60] 목표정답률 00%',
+                      style: SafeGoogleFont(
+                        'Inter',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        height: 1.2125,
+                        color: Color(0xff959595),
+                      ),
+                    ),
+                  ),
+                  // Container(
+                  //   // iwA (1:129)
+                  //   margin: EdgeInsets.fromLTRB(0, 0, 0, 1),
+                  //   child: Text(
+                  //     '(응시횟수: 00)',
+                  //     style: SafeGoogleFont(
+                  //       'Inter',
+                  //       fontSize: 16,
+                  //       fontWeight: FontWeight.w600,
+                  //       height: 1.2125,
+                  //       color: Color(0xff959595),
+                  //     ),
+                  //   ),
+                  // ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 200, 0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        textStyle: TextStyle(fontSize: 15),
+                        fixedSize: Size(85, 35),
+                        //minimumSize: Size(250, 50),
+                        backgroundColor: const Color(0xff0066ff),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      onPressed: () {
+                        showBreakPopup(context);
+                      },
+                      child: const Text('중단하기'),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                     child: Text(
                       'short',
                       textAlign: TextAlign.center,
@@ -225,6 +271,111 @@ class _VocaStudyExamListState extends State<VocaStudyExamList> {
         ],
       ),
     );
+  }
+
+  void showBreakPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          title: Text(
+            '중단하시겠습니까?',
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.w600,
+              height: 1.2125,
+              color: Color(0xff000000),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: Container(
+            width: 373,
+            height: 100,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  ('응시횟수는 성적과 함께 제출됩니다.'),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    height: 1,
+                    color: Color(0xff000000),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  ('시험을 재개한 후, 중단하기를 다시 누르게 되면 이번에는 시험이 바로 종료되고, 성적이 제출됩니다.'),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    height: 1,
+                    color: Color(0xff000000),
+                  ),
+                )
+              ],
+            ),
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    backgroundColor: const Color(0xff0066ff),
+                    minimumSize: Size(85.0, 35.0),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop(); // 팝업 닫기
+                  },
+                  child: Text('YES'),
+                ),
+                SizedBox(width: 20.0),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    backgroundColor: const Color(0xff0066ff),
+                    minimumSize: Size(85.0, 35.0),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop(); // 팝업 닫기
+                  },
+                  child: Text('NO'),
+                ),
+              ],
+            )
+          ],
+        );
+      },
+    );
+    // showDialog(
+    //   context: context,
+    //   builder: (BuildContext context) {
+    //     return AlertDialog(
+    //       title: Text("중단하기"),
+    //       content: Text("시험이 중단되었습니다."),
+    //       actions: [
+    //         TextButton(
+    //           onPressed: () {
+    //             // 팝업 닫기
+    //             Navigator.of(context).pop();
+    //           },
+    //           child: Text("확인"),
+    //         ),
+    //       ],
+    //     );
+    //   },
+    // );
   }
 }
 
