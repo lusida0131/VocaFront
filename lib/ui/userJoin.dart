@@ -132,11 +132,11 @@ class _UserJoinState extends State<UserJoin> {
                   nameTitle(),
                   nameInput(),
                   SizedBox(
-                    height: 30,
+                    height: 40,
                   ),
                   idTitle(),
                   SizedBox(
-                    height: 30,
+                    height: 40,
                   ),
                   passwordInput(),
                   SizedBox(
@@ -163,7 +163,7 @@ class _UserJoinState extends State<UserJoin> {
         children: [
           Container(
             // 5ZA (I1:82;2:986)
-            margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
+            margin: EdgeInsets.fromLTRB(0, 20, 5, 0),
             width: 40,
             height: 30,
             child: GestureDetector(
@@ -179,7 +179,7 @@ class _UserJoinState extends State<UserJoin> {
           ),
           Container(
             // nTa (I1:82;2:987)
-            margin: EdgeInsets.fromLTRB(0, 1, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: Text(
               '회원가입',
               style: SafeGoogleFont(
@@ -199,7 +199,7 @@ class _UserJoinState extends State<UserJoin> {
   Widget nameTitle() {
     return Container(
       // xFa (I1:78;9:73)
-      margin: EdgeInsets.fromLTRB(0, 0, 0, 9),
+      margin: EdgeInsets.fromLTRB(0, 10, 0, 9),
       child: RichText(
         text: TextSpan(
           style: SafeGoogleFont(
@@ -230,9 +230,8 @@ class _UserJoinState extends State<UserJoin> {
   }
 
   Widget nameInput() {
-    return Container(
-      padding: EdgeInsets.fromLTRB(0, 10, 10.41, 12),
-      width: double.infinity,
+    return SizedBox(
+      height: 60, // Set a fixed height
       child: TextFormField(
         controller: _textFieldNameController,
         validator: _validateName,
@@ -252,14 +251,12 @@ class _UserJoinState extends State<UserJoin> {
   }
 
   Widget rePasswordInput() {
-    return Container(
-      // Vu2 (1:81)
-      width: double.infinity,
+    return SizedBox(
+      height: 100, // Set a fixed height
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            // FdJ (I1:81;9:73)
             margin: EdgeInsets.fromLTRB(0, 0, 0, 9),
             child: RichText(
               text: TextSpan(
@@ -288,23 +285,19 @@ class _UserJoinState extends State<UserJoin> {
               ),
             ),
           ),
-          Container(
-            padding: EdgeInsets.fromLTRB(0, 10, 10.41, 0),
-            width: double.infinity,
-            child: TextFormField(
-              controller: _textFieldRePwController,
-              validator: _validateRePassword,
-              obscureText: true,
-              decoration: InputDecoration(
-                border: const UnderlineInputBorder(),
-                hintText: '비밀번호 확인을 입력하세요',
-                hintStyle: SafeGoogleFont(
-                  'Inter',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  height: 1.2125,
-                  color: const Color(0xff979797),
-                ),
+          TextFormField(
+            controller: _textFieldRePwController,
+            validator: _validateRePassword,
+            obscureText: true,
+            decoration: InputDecoration(
+              border: const UnderlineInputBorder(),
+              hintText: '비밀번호 확인을 입력하세요',
+              hintStyle: SafeGoogleFont(
+                'Inter',
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                height: 1.2125,
+                color: const Color(0xff979797),
               ),
             ),
           ),
@@ -314,14 +307,12 @@ class _UserJoinState extends State<UserJoin> {
   }
 
   Widget passwordInput() {
-    return Container(
-      // 9YL (1:80)
-      width: double.infinity,
+    return SizedBox(
+      height: 100, // Set a fixed height
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            // hZr (I1:80;9:73)
             margin: EdgeInsets.fromLTRB(0, 0, 0, 9),
             child: RichText(
               text: TextSpan(
@@ -350,23 +341,19 @@ class _UserJoinState extends State<UserJoin> {
               ),
             ),
           ),
-          Container(
-            padding: EdgeInsets.fromLTRB(0, 10, 10.41, 12),
-            width: double.infinity,
-            child: TextFormField(
-              controller: _textFieldPwController,
-              validator: _validatePassword,
-              obscureText: true,
-              decoration: InputDecoration(
-                border: const UnderlineInputBorder(),
-                hintText: '비밀번호를 입력하세요',
-                hintStyle: SafeGoogleFont(
-                  'Inter',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  height: 1.2125,
-                  color: const Color(0xff979797),
-                ),
+          TextFormField(
+            controller: _textFieldPwController,
+            validator: _validatePassword,
+            obscureText: true,
+            decoration: InputDecoration(
+              border: const UnderlineInputBorder(),
+              hintText: '비밀번호를 입력하세요',
+              hintStyle: SafeGoogleFont(
+                'Inter',
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                height: 1.2125,
+                color: const Color(0xff979797),
               ),
             ),
           ),
@@ -376,14 +363,12 @@ class _UserJoinState extends State<UserJoin> {
   }
 
   Widget idTitle() {
-    return Container(
-      // mPN (1:79)
-      width: double.infinity,
+    return SizedBox(
+      height: 100, // Set a fixed height
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            // K9z (I1:79;9:73)
             margin: EdgeInsets.fromLTRB(0, 0, 0, 9),
             child: RichText(
               text: TextSpan(
@@ -412,22 +397,18 @@ class _UserJoinState extends State<UserJoin> {
               ),
             ),
           ),
-          Container(
-            padding: EdgeInsets.fromLTRB(0, 10, 10.41, 12),
-            width: double.infinity,
-            child: TextFormField(
-              controller: _textFieldIdController,
-              validator: _validateId,
-              decoration: InputDecoration(
-                border: const UnderlineInputBorder(),
-                hintText: '아이디를 입력하세요',
-                hintStyle: SafeGoogleFont(
-                  'Inter',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  height: 1.2125,
-                  color: const Color(0xff979797),
-                ),
+          TextFormField(
+            controller: _textFieldIdController,
+            validator: _validateId,
+            decoration: InputDecoration(
+              border: const UnderlineInputBorder(),
+              hintText: '아이디를 입력하세요',
+              hintStyle: SafeGoogleFont(
+                'Inter',
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                height: 1.2125,
+                color: const Color(0xff979797),
               ),
             ),
           ),

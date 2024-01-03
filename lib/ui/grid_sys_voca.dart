@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(GridVoca());
+  runApp(GridSysVoca());
 }
 
-class GridVoca extends StatefulWidget {
+class GridSysVoca extends StatefulWidget {
   @override
-  _GridVocaState createState() => _GridVocaState();
+  _GridSysVocaState createState() => _GridSysVocaState();
 }
 
-class _GridVocaState extends State<GridVoca> {
+class _GridSysVocaState extends State<GridSysVoca> {
   List<Map> _books = [
     {
       'name': '박현성',

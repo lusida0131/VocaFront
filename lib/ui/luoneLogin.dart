@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/main.dart';
 import 'package:myapp/ui/studyCategory.dart';
 import 'package:myapp/ui/userJoin.dart';
 import 'package:myapp/utils.dart';
@@ -118,7 +117,7 @@ class _LuoneLoginState extends State<LuoneLogin> {
       margin: EdgeInsets.fromLTRB(23, 100, 24, 0),
       // CFJ (1:52)
       width: 381,
-      height: 53,
+      height: 83,
       child: Image.asset(
         'assets/page-1/images/ruonelogo.png',
         fit: BoxFit.cover,
@@ -129,7 +128,7 @@ class _LuoneLoginState extends State<LuoneLogin> {
   Widget _luoneBox() {
     return Container(
       // xNt (1:53)
-      margin: EdgeInsets.fromLTRB(0, 50, 4, 53),
+      margin: EdgeInsets.fromLTRB(0, 50, 4, 50),
       width: 169,
       height: 167,
       child: Image.asset(
@@ -142,8 +141,9 @@ class _LuoneLoginState extends State<LuoneLogin> {
   Widget _idInput() {
     return Container(
       // 4gp (1:47)
-      margin: const EdgeInsets.fromLTRB(47, 30, 47, 20),
+      margin: const EdgeInsets.fromLTRB(47, 0, 47, 20),
       //padding: const EdgeInsets.fromLTRB(1, 15, 1, 20),
+      height: 83, // Set a fixed height
       width: double.infinity,
       child: TextFormField(
         keyboardType: TextInputType.text,
@@ -169,7 +169,7 @@ class _LuoneLoginState extends State<LuoneLogin> {
   Widget _loginSubmit() {
     return Container(
       // YEc (1:50)
-      margin: EdgeInsets.fromLTRB(90, 0, 93, 20),
+      margin: EdgeInsets.fromLTRB(90, 10, 93, 20),
       width: double.infinity,
       height: 43,
       child: Center(
@@ -195,8 +195,8 @@ class _LuoneLoginState extends State<LuoneLogin> {
   Widget _passwordInput() {
     return Container(
       // 67i (1:48)
-      margin: EdgeInsets.fromLTRB(47, 0, 47, 50),
-      padding: EdgeInsets.fromLTRB(1, 5, 1, 1.5),
+      margin: EdgeInsets.fromLTRB(47, 0, 47, 30),
+      height: 83, // Set a fixed height
       width: double.infinity,
       child: TextFormField(
         controller: _passwordController,

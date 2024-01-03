@@ -14,58 +14,56 @@ class StudyCategory extends StatelessWidget {
       width: double.infinity,
       child: Container(
         // flutter4nc (1:228)
-        padding: EdgeInsets.fromLTRB(12 * fem, 56 * fem, 12 * fem, 141 * fem),
+        padding: EdgeInsets.fromLTRB(12, 56, 12, 141),
         width: double.infinity,
         decoration: BoxDecoration(
           color: Color(0xfff8f8f8),
-          borderRadius: BorderRadius.circular(20 * fem),
+          borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               // autogroupfdagMFv (6ensGzdBMpUztPtpxpfDaG)
-              margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 15 * fem, 44 * fem),
+              margin: EdgeInsets.fromLTRB(0, 0, 15, 44),
               width: double.infinity,
-              height: 24 * fem,
+              height: 24,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     // ULY (1:233)
-                    margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0, 0 * fem),
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     height: double.infinity,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
                           // 1LU (I1:233;2:986)
-                          margin: EdgeInsets.fromLTRB(
-                              0 * fem, 0 * fem, 5 * fem, 0 * fem),
-                          width: 24 * fem,
-                          height: 24 * fem,
+                          margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                          width: 24,
+                          height: 24,
                           child: GestureDetector(
                             onTap: () {
                               Navigator.of(context).pop();
                             }, // 뒤로가기 동작
                             child: Image.asset(
                               'assets/page-1/images/-wh2.png',
-                              width: 40 * fem,
-                              height: 40 * fem,
+                              width: 40,
+                              height: 40,
                             ),
                           ),
                         ),
                         Container(
                           // L7r (I1:233;2:987)
-                          margin: EdgeInsets.fromLTRB(
-                              0 * fem, 1 * fem, 0 * fem, 0 * fem),
+                          margin: EdgeInsets.fromLTRB(0, 1, 0, 0),
                           child: Text(
                             '뒤로가기',
                             style: SafeGoogleFont(
                               'Inter',
-                              fontSize: 16 * ffem,
+                              fontSize: 16,
                               fontWeight: FontWeight.w600,
-                              height: 1.2125 * ffem / fem,
+                              height: 1.2125,
                               color: Color(0xff000000),
                             ),
                           ),
@@ -73,32 +71,21 @@ class StudyCategory extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Container(
-                  //   // settingsSgg (1:230)
-                  //   width: 20 * fem,
-                  //   height: 20 * fem,
-                  //   child: Image.asset(
-                  //     'assets/page-1/images/settings-x9n.png',
-                  //     width: 20 * fem,
-                  //     height: 20 * fem,
-                  //   ),
-                  // ),
                 ],
               ),
             ),
             Container(
               // cardAcg (1:237)
-              margin:
-                  EdgeInsets.fromLTRB(12 * fem, 0 * fem, 19 * fem, 43 * fem),
+              margin: EdgeInsets.fromLTRB(12, 0, 19, 43),
               width: double.infinity,
-              height: 130 * fem,
+              height: 130,
               child: Center(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(350 * fem, 180 * fem),
+                    minimumSize: Size(350, 180),
                     backgroundColor: Color.fromARGB(255, 191, 215, 243),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(35 * fem),
+                      borderRadius: BorderRadius.circular(35),
                     ),
                   ),
                   onPressed: () {
@@ -112,9 +99,9 @@ class StudyCategory extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: SafeGoogleFont(
                       'Inter',
-                      fontSize: 35 * ffem,
+                      fontSize: 35,
                       fontWeight: FontWeight.w600,
-                      height: 1.2125 * ffem / fem,
+                      height: 1.2125,
                       color: Color(0xff000000),
                     ),
                   ),
@@ -123,18 +110,17 @@ class StudyCategory extends StatelessWidget {
             ),
             Container(
               // card9Uc (1:234)
-              margin:
-                  EdgeInsets.fromLTRB(16 * fem, 0 * fem, 15 * fem, 49 * fem),
+              margin: EdgeInsets.fromLTRB(16, 0, 15, 49),
               width: double.infinity,
-              height: 130 * fem,
+              height: 130,
 
               child: Center(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(350 * fem, 180 * fem),
+                    minimumSize: Size(350, 180),
                     backgroundColor: const Color.fromARGB(255, 191, 215, 243),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(35 * fem),
+                      borderRadius: BorderRadius.circular(35),
                     ),
                   ),
                   onPressed: () {},
@@ -143,9 +129,9 @@ class StudyCategory extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: SafeGoogleFont(
                       'Inter',
-                      fontSize: 35 * ffem,
+                      fontSize: 35,
                       fontWeight: FontWeight.w600,
-                      height: 1.2125 * ffem / fem,
+                      height: 1.2125,
                       color: Color(0xff000000),
                     ),
                   ),
@@ -154,18 +140,17 @@ class StudyCategory extends StatelessWidget {
             ),
             Container(
               // cardkDW (1:240)
-              margin:
-                  EdgeInsets.fromLTRB(12 * fem, 0 * fem, 19 * fem, 49 * fem),
+              margin: EdgeInsets.fromLTRB(12, 0, 19, 49),
               width: double.infinity,
-              height: 130 * fem,
+              height: 130,
               child: Center(
                 child: Center(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      minimumSize: Size(350 * fem, 180 * fem),
+                      minimumSize: Size(350, 180),
                       backgroundColor: const Color.fromARGB(255, 191, 215, 243),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(35 * fem),
+                        borderRadius: BorderRadius.circular(35),
                       ),
                     ),
                     onPressed: () {},
@@ -174,9 +159,9 @@ class StudyCategory extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: SafeGoogleFont(
                         'Inter',
-                        fontSize: 35 * ffem,
+                        fontSize: 35,
                         fontWeight: FontWeight.w600,
-                        height: 1.2125 * ffem / fem,
+                        height: 1.2125,
                         color: Color(0xff000000),
                       ),
                     ),
@@ -186,18 +171,18 @@ class StudyCategory extends StatelessWidget {
             ),
             Container(
               // cardB3v (1:243)
-              margin: EdgeInsets.fromLTRB(17 * fem, 0 * fem, 14 * fem, 0 * fem),
+              margin: EdgeInsets.fromLTRB(17, 0, 14, 0),
               width: double.infinity,
-              height: 130 * fem,
+              height: 130,
 
               child: Center(
                 child: Center(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      minimumSize: Size(350 * fem, 180 * fem),
+                      minimumSize: Size(350, 180),
                       backgroundColor: const Color.fromARGB(255, 191, 215, 243),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(35 * fem),
+                        borderRadius: BorderRadius.circular(35),
                       ),
                     ),
                     onPressed: () {},
@@ -206,9 +191,9 @@ class StudyCategory extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: SafeGoogleFont(
                         'Inter',
-                        fontSize: 35 * ffem,
+                        fontSize: 35,
                         fontWeight: FontWeight.w600,
-                        height: 1.2125 * ffem / fem,
+                        height: 1.2125,
                         color: Color(0xff000000),
                       ),
                     ),

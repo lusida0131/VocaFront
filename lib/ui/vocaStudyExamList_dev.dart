@@ -12,6 +12,11 @@ class VocaStudyExamList extends StatefulWidget {
   _VocaStudyExamListState createState() => _VocaStudyExamListState();
 }
 
+enum ButtonState {
+  NotSelected,
+  Selected,
+}
+
 class Item {
   final String text;
 
@@ -20,11 +25,120 @@ class Item {
 
 class _VocaStudyExamListState extends State<VocaStudyExamList> {
   late List<Item> items;
+  late List<ButtonState> buttonStates; // 각 버튼의 상태 저장
+
+  PageController _pageController = PageController(initialPage: 0);
+  int currentIndex = 0;
+  Timer? _timer;
+  bool showDefinition = false;
+  final List<Map<String, dynamic>> cardData = [
+    {
+      "wordId": 651,
+      "word": "large",
+      "originalMeaning": "큰, 넓은, 많은",
+      "wrongMeaning1": "(앞에 챙이 달린) 모자",
+      "wrongMeaning2": "행복한",
+      "wrongMeaning3": "너무, 또한, 게다가",
+      "wrongMeaning4": "(장소) ~에서(부터), (시각) ~부터"
+    },
+    {
+      "wordId": 651,
+      "word": "large",
+      "originalMeaning": "큰, 넓은, 많은",
+      "wrongMeaning1": "(앞에 챙이 달린) 모자",
+      "wrongMeaning2": "행복한",
+      "wrongMeaning3": "너무, 또한, 게다가",
+      "wrongMeaning4": "(장소) ~에서(부터), (시각) ~부터"
+    },
+    {
+      "wordId": 651,
+      "word": "large",
+      "originalMeaning": "큰, 넓은, 많은",
+      "wrongMeaning1": "(앞에 챙이 달린) 모자",
+      "wrongMeaning2": "행복한",
+      "wrongMeaning3": "너무, 또한, 게다가",
+      "wrongMeaning4": "(장소) ~에서(부터), (시각) ~부터"
+    },
+    {
+      "wordId": 651,
+      "word": "large",
+      "originalMeaning": "큰, 넓은, 많은",
+      "wrongMeaning1": "(앞에 챙이 달린) 모자",
+      "wrongMeaning2": "행복한",
+      "wrongMeaning3": "너무, 또한, 게다가",
+      "wrongMeaning4": "(장소) ~에서(부터), (시각) ~부터"
+    },
+    {
+      "wordId": 651,
+      "word": "large",
+      "originalMeaning": "큰, 넓은, 많은",
+      "wrongMeaning1": "(앞에 챙이 달린) 모자",
+      "wrongMeaning2": "행복한",
+      "wrongMeaning3": "너무, 또한, 게다가",
+      "wrongMeaning4": "(장소) ~에서(부터), (시각) ~부터"
+    },
+    // ... other words
+  ];
+  int? selectedDefinitionIndex;
+  // Update the onPressed callback in the button generation part
+  void onDefinitionButtonPressed(int index) {
+    setState(() {
+      selectedDefinitionIndex = index;
+
+      // Check if the selected definition is the correct one (originalMeaning)
+      final String selectedDefinition = getSelectedDefinition(index);
+      final String correctDefinition =
+          cardData[currentIndex]['originalMeaning'];
+
+      if (selectedDefinition == correctDefinition) {
+        // Update the button state to indicate that it's the correct answer
+        updateButtonState(index);
+      }
+    });
+  }
+
+  String getSelectedDefinition(int index) {
+    final Map<String, dynamic>? currentCard = cardData[currentIndex];
+
+    if (currentCard != null) {
+      switch (index) {
+        case 0:
+          return currentCard['originalMeaning'];
+        case 1:
+          return currentCard['wrongMeaning1'];
+        case 2:
+          return currentCard['wrongMeaning2'];
+        case 3:
+          return currentCard['wrongMeaning3'];
+        case 4:
+          return currentCard['wrongMeaning4'];
+        default:
+          return '';
+      }
+    } else {
+      return ''; // or handle this case accordingly based on your requirements
+    }
+  }
+
+  // Add a method to handle the submission
+  void onSubmitButtonPressed() {
+    if (selectedDefinitionIndex != null) {
+      // Perform the submission logic using cardData[currentIndex]['definitions'][selectedDefinitionIndex]
+      print(
+          'Selected Definition: ${cardData[currentIndex]['definitions'][selectedDefinitionIndex!]}');
+    } else {
+      // Handle the case where no definition is selected
+      print('Please select a definition before submitting.');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     items = []; // 초기화
-
+    buttonStates = List.generate(5, (index) => ButtonState.NotSelected); // 초기화
+    showDefinition = true; // Set showDefinition to true initially
+    _startTimer();
     // 비동기 함수 호출
     fetchData();
   }
@@ -42,6 +156,34 @@ class _VocaStudyExamListState extends State<VocaStudyExamList> {
       // 오류 처리
       throw Exception('Failed to load data');
     }
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 5), (timer) {
+      if (currentIndex < cardData.length - 1) {
+        currentIndex++;
+      } else {
+        _stopTimer(); // Stop the timer when reaching the last card
+      }
+      _pageController.animateToPage(
+        currentIndex,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+      _showDefinition();
+    });
+  }
+
+  void _showDefinition() {
+    Timer(Duration(seconds: 5), () {
+      setState(() {
+        showDefinition = true;
+      });
+    });
+  }
+
+  void _stopTimer() {
+    _timer?.cancel();
   }
 
   @override
@@ -110,162 +252,128 @@ class _VocaStudyExamListState extends State<VocaStudyExamList> {
             margin: EdgeInsets.fromLTRB(15, 0, 15, 30),
             width: 373.0, // 원하는 너비
             height: 473.0, // 원하는 높이
-            child: Card(
-              elevation: 50,
-              shadowColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(35.0),
-                  side: BorderSide(width: 0.1)),
-              color: Colors.grey[300],
-              child: Column(
-                children: [
-                  Container(
-                    // iwA (1:129)
-                    margin: EdgeInsets.fromLTRB(0, 30, 0, 1),
-                    child: Text(
-                      '중등 입문 Day 00 ~ 00 [39 / 60] 목표정답률 00%',
-                      style: SafeGoogleFont(
-                        'Inter',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        height: 1.2125,
-                        color: Color(0xff959595),
-                      ),
-                    ),
+            child: Column(
+              children: [
+                Expanded(
+                  child: PageView.builder(
+                    controller: _pageController,
+                    physics: NeverScrollableScrollPhysics(),
+                    onPageChanged: (index) {
+                      setState(() {
+                        currentIndex = index;
+                        // showDefinition =
+                        //     false; // Reset showDefinition when manually sliding
+                      });
+                    },
+                    itemCount: cardData.length,
+                    itemBuilder: (context, index) {
+                      // Check if currentIndex is a valid index in the cardData list
+                      if (currentIndex >= 0 && currentIndex < cardData.length) {
+                        return Card(
+                          elevation: 50,
+                          shadowColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(35.0),
+                              side: BorderSide(width: 0.1)),
+                          color: Colors.grey[300],
+                          child: Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        child: Text(
+                                          '중등 입문 00번 ~ 00번',
+                                          style: TextStyle(fontSize: 22.0),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          '[${currentIndex + 1} / ${cardData.length}]',
+                                          style: TextStyle(fontSize: 20.0),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () {},
+                                        child: Text('Speak Word'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                  child: Text(
+                                    cardData[index]['word'] ?? '',
+                                    textAlign: TextAlign.center,
+                                    style: SafeGoogleFont(
+                                      'Inter',
+                                      fontSize: 35,
+                                      fontWeight: FontWeight.w600,
+                                      height: 1.2125,
+                                      color: Color(0xff000000),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  child: CountdownTimer(
+                                    duration: Duration(minutes: 5),
+                                  ),
+                                ),
+                                SizedBox(height: 16.0),
+                                if (showDefinition)
+                                  Container(
+                                    child: Column(
+                                      children: List.generate(
+                                        5, // Assuming you always have 5 options
+                                        (i) {
+                                          return Container(
+                                            child: TextButton(
+                                              onPressed: () {
+                                                onDefinitionButtonPressed(i);
+                                              },
+                                              style: getButtonStyle(i),
+                                              child: Text(
+                                                "${i + 1}. ${getSelectedDefinition(i)}",
+                                                style: SafeGoogleFont(
+                                                  'Inter',
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                  height: 1.2125,
+                                                  color: Color(0xff000000),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        );
+                      } else {
+                        // Handle the case where currentIndex is out of bounds
+                        return SizedBox
+                            .shrink(); // or return an empty widget, depending on your requirements
+                      }
+                    },
                   ),
-                  // Container(
-                  //   // iwA (1:129)
-                  //   margin: EdgeInsets.fromLTRB(0, 0, 0, 1),
-                  //   child: Text(
-                  //     '(응시횟수: 00)',
-                  //     style: SafeGoogleFont(
-                  //       'Inter',
-                  //       fontSize: 16,
-                  //       fontWeight: FontWeight.w600,
-                  //       height: 1.2125,
-                  //       color: Color(0xff959595),
-                  //     ),
-                  //   ),
-                  // ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 200, 0),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        textStyle: TextStyle(fontSize: 15),
-                        fixedSize: Size(85, 35),
-                        //minimumSize: Size(250, 50),
-                        backgroundColor: const Color(0xff0066ff),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      onPressed: () {
-                        showBreakPopup(context);
-                      },
-                      child: const Text('중단하기'),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                    child: Text(
-                      'short',
-                      textAlign: TextAlign.center,
-                      style: SafeGoogleFont(
-                        'Inter',
-                        fontSize: 55,
-                        fontWeight: FontWeight.w600,
-                        height: 1.2125,
-                        color: Color(0xff000000),
-                      ),
-                    ),
-                  ),
-                  Container(
-                      child: CountdownTimer(
-                    duration: Duration(minutes: 5),
-                  )),
-                  Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              "1. (키가) 큰, (높이가) 높은",
-                              style: SafeGoogleFont(
-                                'Inter',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                height: 1.2125,
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              "2. (키가) 큰, (높이가) 높은",
-                              style: SafeGoogleFont(
-                                'Inter',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                height: 1.2125,
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              "3. (키가) 큰, (높이가) 높은",
-                              style: SafeGoogleFont(
-                                'Inter',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                height: 1.2125,
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              "4. (키가) 큰, (높이가) 높은",
-                              style: SafeGoogleFont(
-                                'Inter',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                height: 1.2125,
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              "5. (키가) 큰, (높이가) 높은",
-                              style: SafeGoogleFont(
-                                'Inter',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                height: 1.2125,
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],
@@ -273,110 +381,130 @@ class _VocaStudyExamListState extends State<VocaStudyExamList> {
     );
   }
 
-  void showBreakPopup(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25.0),
-          ),
-          title: Text(
-            '중단하시겠습니까?',
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w600,
-              height: 1.2125,
-              color: Color(0xff000000),
-            ),
-            textAlign: TextAlign.center,
-          ),
-          content: Container(
-            width: 373,
-            height: 100,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  ('응시횟수는 성적과 함께 제출됩니다.'),
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    height: 1,
-                    color: Color(0xff000000),
-                  ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  ('시험을 재개한 후, 중단하기를 다시 누르게 되면 이번에는 시험이 바로 종료되고, 성적이 제출됩니다.'),
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    height: 1,
-                    color: Color(0xff000000),
-                  ),
-                )
-              ],
-            ),
-          ),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    backgroundColor: const Color(0xff0066ff),
-                    minimumSize: Size(85.0, 35.0),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop(); // 팝업 닫기
-                  },
-                  child: Text('YES'),
-                ),
-                SizedBox(width: 20.0),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    backgroundColor: const Color(0xff0066ff),
-                    minimumSize: Size(85.0, 35.0),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop(); // 팝업 닫기
-                  },
-                  child: Text('NO'),
-                ),
-              ],
-            )
-          ],
-        );
-      },
-    );
-    // showDialog(
-    //   context: context,
-    //   builder: (BuildContext context) {
-    //     return AlertDialog(
-    //       title: Text("중단하기"),
-    //       content: Text("시험이 중단되었습니다."),
-    //       actions: [
-    //         TextButton(
-    //           onPressed: () {
-    //             // 팝업 닫기
-    //             Navigator.of(context).pop();
-    //           },
-    //           child: Text("확인"),
-    //         ),
-    //       ],
-    //     );
-    //   },
-    // );
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _pageController.dispose();
+    super.dispose();
   }
+
+  // 버튼의 상태에 따라 스타일을 반환
+  ButtonStyle getButtonStyle(int index) {
+    return TextButton.styleFrom(
+      backgroundColor: getButtonBackgroundColor(index),
+    );
+  }
+
+  Color getButtonBackgroundColor(int index) {
+    if (selectedDefinitionIndex != null) {
+      if (index == selectedDefinitionIndex) {
+        return const Color(0xff0066ff); // Selected button color
+      } else if (cardData[currentIndex]['definitions'][index] ==
+          cardData[currentIndex]['originalMeaning']) {
+        return Colors.green; // Correct answer color
+      }
+    }
+    return Colors.grey; // Default button color
+  }
+
+  // 버튼의 상태 업데이트
+  void updateButtonState(int index) {
+    setState(() {
+      // 모든 버튼의 상태 초기화
+      buttonStates = List.generate(5, (index) => ButtonState.NotSelected);
+      // 선택된 버튼의 상태 업데이트
+      buttonStates[index] = buttonStates[index] == ButtonState.Selected
+          ? ButtonState.NotSelected
+          : ButtonState.Selected;
+    });
+  }
+}
+
+void showBreakPopup(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25.0),
+        ),
+        title: Text(
+          '중단하시겠습니까?',
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w600,
+            height: 1.2125,
+            color: Color(0xff000000),
+          ),
+          textAlign: TextAlign.center,
+        ),
+        content: Container(
+          width: 373,
+          height: 100,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                ('응시횟수는 성적과 함께 제출됩니다.'),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  height: 1,
+                  color: Color(0xff000000),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                ('시험을 재개한 후, 중단하기를 다시 누르게 되면 이번에는 시험이 바로 종료되고, 성적이 제출됩니다.'),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  height: 1,
+                  color: Color(0xff000000),
+                ),
+              )
+            ],
+          ),
+        ),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  backgroundColor: const Color(0xff0066ff),
+                  minimumSize: Size(85.0, 35.0),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop(); // 팝업 닫기
+                },
+                child: Text('YES'),
+              ),
+              SizedBox(width: 20.0),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  backgroundColor: const Color(0xff0066ff),
+                  minimumSize: Size(85.0, 35.0),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop(); // 팝업 닫기
+                },
+                child: Text('NO'),
+              ),
+            ],
+          )
+        ],
+      );
+    },
+  );
 }
 
 class CountdownTimer extends StatefulWidget {
